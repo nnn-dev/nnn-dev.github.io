@@ -26,6 +26,15 @@ WARNING: Internet Access
 
 == Setup
 
+=== Install Bundler
+
+. On *Command Prompt*, launch 
+----
+jgem.bat install bundler
+----
+
+
+
 === Add Ruby plugin on Geppetto
 
 . Launch Geppetto
@@ -35,4 +44,12 @@ WARNING: Internet Access
 . Install it
 . On Geppetto's menu, select *Window* => *Preferences*
 . Navigate to *Ruby* => *Interpreters*
+. Click on *Add...*
+. In *Interpreter executable*, browse for _jruby.exe
+. If correct, the fields _Interpreter name_ and _Interpreter system librairies_ atre completed
+
+
+
+
+
 
