@@ -1,0 +1,38 @@
+= Puppet - Geppetto and JRuby
+:published_at: 2016-XX-XX
+:hp-tags: puppet
+:hp-alt-title: Using Geppetto and JRuby to create Puppet module
+
+NOTE: I have been inspired by this article of camptocamp :  http://www.camptocamp.com/actualite/puppet-test-driven-development-part-0-setup-environment/[Puppet Test Driven Development: Part 0 – Set up your environment]
+
+
+== Prerequisites
+
+These products can be uncompressed anywhere:
+
+* https://puppetlabs.github.io/geppetto/download.html[Geppetto] : Puppet IDE (based on Eclipse)
+* http://jruby.org/download[JRruby] : Ruby on Java
+
+These products are installed on system:
+
+* java : to launch Geppetto and JRuby
+* https://www.docker.com/[docker] : to provide test machines
+
+Environment:
+
+* I have used a *Microsoft Windows* environment but products used (java and docker) are multi-platforms.
+
+WARNING: Internet Access
+
+== Setup
+
+=== Add Ruby plugin on Geppetto
+
+. Launch Geppetto
+. On Geppetto's menu, select *Help* => *Install New Software*
+. Indicate *Work with* : http://download.eclipse.org/technology/dltk/updates
+. Search latest version of *Dynamic Languages Toolkit - Ruby Development Tools*
+. Install it
+. On Geppetto's menu, select *Window* => *Preferences*
+. Navigate to *Ruby* => *Interpreters*
+
