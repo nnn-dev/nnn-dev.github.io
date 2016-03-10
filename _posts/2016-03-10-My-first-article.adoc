@@ -1,0 +1,6 @@
+= First Article
+:published_at: 2016-03-10
+:hp-tags: Test
+:hp-alt-title: My first article
+
+A test
