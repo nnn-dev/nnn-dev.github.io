@@ -1,10 +1,1 @@
-{
-  "meta": {
-    "username": "nnn-dev",
-    "repositoryName": "nnn-dev.github.io",
-    "branch": "master"
-  },
-  "theme": {
-    "name": "Casper"
-  }
-}
+{"meta":{"username":"nnn-dev","repositoryName":"nnn-dev.github.io","branch":"master"},"site":{"title":"Nnn Dev","description":"Nnn Dev Blog","url":"https://nnn-dev.github.io"},"socialnetwork":{},"theme":{"name":"Casper","url":"//nnn-dev.github.io/themes/Casper"}}
