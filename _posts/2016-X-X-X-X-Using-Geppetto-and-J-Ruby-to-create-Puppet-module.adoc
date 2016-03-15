@@ -10,7 +10,7 @@ NOTE: I have been inspired by this article of camptocamp :  http://www.camptocam
 
 These products can be uncompressed anywhere:
 
-* https://puppetlabs.github.io/geppetto/download.html[Geppetto] : Puppet IDE (based on Eclipse)
+* https://eclipse.org/downloads/[Eclipse] : Eclipse. I prefer to use Eclipse base (like Eclipse for Testers) instead out-of-date Geppetto standalone.
 * http://jruby.org/download[JRruby] : Ruby on Java
 
 These products are installed on system:
@@ -24,30 +24,136 @@ Environment:
 
 WARNING: Internet Access
 
-== Setup
+== Setup Eclipse/Geppetto
 
-=== Install Bundler
+=== Add Geppetto plugin
+
+. Launch Eclipse
+. On Eclipse's menu, select *Help* => *Install New Software*
+. Indicate *Work with* : http://geppetto-updates.puppetlabs.com/4.x
+. Select _Geppetto for Eclipse IDE (don't install into stand-alone product)_
+. Install it
+
+=== Add Ruby plugin
+
+. Launch Eclipse
+. On Eclipse's menu, select *Help* => *Install New Software*
+. Indicate *Work with* : --All Available Sites--
+. Search latest version of *Dynamic Languages Toolkit - Ruby Development Tools*
+. Note: if doesn't exist use this url http://download.eclipse.org/technology/dltk/updates
+. Install it
+. On Eclipse's menu, select *Window* => *Preferences*
+. Navigate to *Ruby* => *Interpreters*
+. Click on *Add...*
+. Choose _JRuby_ for *Interpreter type*
+. In *Interpreter executable*, browse for _jruby.exe_
+. If correct, the fields _Interpreter name_ and _Interpreter system librairies_ must be completed
+. Click *Ok*
+
+=== Add WikiText
+
+I use this plugin to create or show Markdown file
+
+. Launch Eclipse
+. On Eclipse's menu, select *Help* => *Install New Software*
+. Indicate *Work with* : --All Available Sites--
+. Search _Mylyn WikiText SDK_ (on Mylyn Features)
+. Note: if doesn't exist use this url http://download.eclipse.org/mylyn/releases/latest
+. Install it
+
+== Install Bundler
 
 . On *Command Prompt*, launch 
 ----
 jgem.bat install bundler
 ----
 
+== Module
+
+=== Create from wizard
+
+. On Geppetto's menu, select *File* => *New* => *Project*
+. Select *Puppet* => *Puppet Module Project*
+. Click *Next>*
+. Indicate a simple name for the project (like _openldap_)
+. Complete the *metadata.json* and save it
+
+[source,json]
+----
+{
+  "name": "nnndev-openldap",
+  "version": "0.0.1",
+  "author": "nnndev",
+  "license": "Apache-2.0",
+  "summary": "Puppet OpenLDAP module",
+  "source": "https://github.com/nnn-dev/puppet-openldap",
+  "dependencies": [
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ]
+}
+----
+
+=== Add Ruby Nature
+
+WARNING I have not found how to add the ruby nature directly
+
+. Exit Eclipse
+. Change the _.project_ (see below)
+. Restart Eclipse
+
+NOTE Modify the name tag with our project's name.
 
 
-=== Add Ruby plugin on Geppetto
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>openldap</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+   		<buildCommand>
+			<name>org.eclipse.dltk.core.scriptbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+    <natures>
+		<nature>com.puppetlabs.geppetto.pp.dsl.ui.puppetNature</nature>
+		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
+		<nature>org.eclipse.dltk.ruby.core.nature</nature>
+	</natures>
+</projectDescription>
+----
 
-. Launch Geppetto
-. On Geppetto's menu, select *Help* => *Install New Software*
-. Indicate *Work with* : http://download.eclipse.org/technology/dltk/updates
-. Search latest version of *Dynamic Languages Toolkit - Ruby Development Tools*
-. Install it
-. On Geppetto's menu, select *Window* => *Preferences*
-. Navigate to *Ruby* => *Interpreters*
-. Click on *Add...*
-. In *Interpreter executable*, browse for _jruby.exe
-. If correct, the fields _Interpreter name_ and _Interpreter system librairies_ atre completed
 
+
+== Use bundler
+
+. On Eclipse's menu, select *File* => *New* => *File*
+. Indicate _Gemfile_ for filename under our project 
+
+[source,ruby]
+----
 
 
 
