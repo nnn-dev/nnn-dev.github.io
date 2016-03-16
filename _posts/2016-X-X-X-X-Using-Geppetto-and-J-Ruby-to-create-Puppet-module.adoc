@@ -61,12 +61,17 @@ I use this plugin to create or show Markdown file
 . Note: if doesn't exist use this url http://download.eclipse.org/mylyn/releases/latest
 . Install it
 
-== Install Bundler
+=== Add a _shell_ launch configuration
 
-. On *Command Prompt*, launch 
-----
-jgem.bat install bundler
-----
+Many commands must be run from the project directory. 
+
+. On Eclipse's menu, select *Run* => *External Tools* => *External Tools Configuration...*
+. Create new launch configuration
+** Location :  `${env_var:ComSpec}`
+** Working Directory : `${project_loc}`
+** Environment variables:
+*** PATH : bin directory of jruby
+
 
 == Module
 
@@ -146,7 +151,6 @@ NOTE Modify the name tag with our project's name.
 ----
 
 
-
 == Use bundler
 
 . On Eclipse's menu, select *File* => *New* => *File*
@@ -154,8 +158,18 @@ NOTE Modify the name tag with our project's name.
 
 [source,ruby]
 ----
+source 'https://rubygems.org'
 
+gem 'puppet',       :require => false
+gem 'beaker-rspec', :require => false
+---
 
+. Launch shell
+. Type
+----
+jgem install bundler
+bundle install --path vendor/bundle
+----
 
 
 
