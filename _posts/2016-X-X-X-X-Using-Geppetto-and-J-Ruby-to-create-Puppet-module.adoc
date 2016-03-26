@@ -5,6 +5,7 @@
 
 NOTE: I have been inspired by this article of camptocamp :  http://www.camptocamp.com/actualite/puppet-test-driven-development-part-0-setup-environment/[Puppet Test Driven Development: Part 0 – Set up your environment]
 
+But I prefer to use ttp://serverspec.org/[serverspec]
 
 == Prerequisites
 
@@ -28,7 +29,6 @@ WARNING: Internet Access
 
 === Add Geppetto plugin
 
-. Launch Eclipse
 . On Eclipse's menu, select *Help* => *Install New Software*
 . Indicate *Work with* : http://geppetto-updates.puppetlabs.com/4.x
 . Select _Geppetto for Eclipse IDE (don't install into stand-alone product)_
@@ -36,7 +36,6 @@ WARNING: Internet Access
 
 === Add Ruby plugin
 
-. Launch Eclipse
 . On Eclipse's menu, select *Help* => *Install New Software*
 . Indicate *Work with* : --All Available Sites--
 . Search latest version of *Dynamic Languages Toolkit - Ruby Development Tools*
@@ -49,6 +48,16 @@ WARNING: Internet Access
 . In *Interpreter executable*, browse for _jruby.exe_
 . If correct, the fields _Interpreter name_ and _Interpreter system librairies_ must be completed
 . Click *Ok*
+
+=== Add Ansiconsole
+
+The Ansiconsole plugin can color the console.
+
+. On Eclipse's menu, select *Help* => *Install New Software*
+. Indicate *Work with* : http://www.mihai-nita.net/eclipse
+. Select _Ansi Console_
+. Install it
+
 
 === Add WikiText
 
@@ -150,8 +159,17 @@ NOTE Modify the name tag with our project's name.
 </projectDescription>
 ----
 
+== Prepare acceptance test
 
-== Use bundler
+=== Use bundler
+
+First, we must exclude the destination path of dependencies.
+
+. On eclipse, right click on project => *Properties*
+. On *Resource* => *Resource Filters*
+. Add *Exclude all* rules applies to *Folder* with *Name* matches *vendor*
+
+Now, we must indicate dependencies.
 
 . On Eclipse's menu, select *File* => *New* => *File*
 . Indicate _Gemfile_ for filename under our project 
@@ -162,14 +180,93 @@ source 'https://rubygems.org'
 
 gem 'puppet',       :require => false
 gem 'beaker-rspec', :require => false
+gem 'serverspec',   :require => false
 ---
+
+And we can retreive dependencies.
 
 . Launch shell
 . Type
+
 ----
 jgem install bundler
 bundle install --path vendor/bundle
 ----
 
+=== Configure nodes
 
+We declare two nodes
 
+. Create the sub-repository *spec/acceptance/nodesets* on our project
+. Create a file for each host
+.. *spec/acceptance/nodesets/ubuntu12.yml*
+
+[source,yaml]
+----
+HOSTS:
+  ubuntu-12-10:
+    platform: ubuntu-12.10-x64
+    image: ubuntu:12.10
+    hypervisor: docker
+CONFIG:
+  type: foss
+----
+
+.. *spec/acceptance/nodesets/centos7.yml*
+
+[source,yaml]
+----
+HOSTS:
+  centos7:
+   platform: el-7-x64
+   image: centos:7
+   hypervisor: docker
+CONFIG:
+  type: foss
+----
+
+=== Configure Beaker
+
+. Create the *spec/spec_helper_acceptance.rb*
+
+[source,ruby]
+----
+require 'beaker-rspec'
+
+hosts.each do |host|
+  # Install Puppet
+  on host, install_puppet
+end
+
+RSpec.configure do |c|
+  module_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+  module_name = module_root.split('-').last
+
+  # Readable test descriptions
+  c.formatter = :documentation
+
+  # Configure all nodes in nodeset
+  c.before :suite do
+    # Install module
+    puppet_module_install(:source => module_root, :module_name => module_name)
+  end
+end
+----
+
+. Create the *.fixtures.yml* on root. 
+
+[source,yaml]
+----
+fixtures:
+  symlinks:
+    openldap: "#{source_dir}"
+----
+
+=== Add Beakeron the rakefile
+
+. Add this line to the Rakefile
+
+[source,ruby]
+----
+require 'puppetlabs_spec_helper/rake_tasks'
+----
