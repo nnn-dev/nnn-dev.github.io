@@ -1,0 +1,46 @@
+= JRuby on Windows
+:published_at: 2017-XX-XX
+:hp-tags: jruby, windows
+:hp-alt-title: Using JRuby on Windows
+
+== Introduction
+
+I want to work on my Windows machine without installing all stuff with native ruby (compiler etc...).
+
+== Prerequisites
+
+* https://www.java.com/fr/[java] only a jre is necessary
+
+== Download JRuby
+
+Download http://jruby.org/download[the lastest zip archive of jruby]
+
+Uncompress it into any folder
+
+== Create a launcher
+
+Create a batch file for open a command prompt for using easily ruby
+
+* you need to modify the path where java is installed (JAVA_HOME)
+* you need to modify the path where jruby was uncompressed (JRUBY_HOME)
+* you can specify a working dir if you want
+
+[source,batch]
+@echo off
+@rem where java is installed
+set JAVA_HOME="C:\Program Files (x86)\Java\jre1.8.0_121"
+@rem where jruby was installed
+set JRUBY_PATH=xxx
+set PATH=%JRUBY_HOME%\bin;%JAVA_HOME%\bin;%PATH%
+@rem launch command promp
+%comspec%
+@rem you can replace with powershell if you want
+@rem powershell.exe
+
+== Finish
+
+Launch the batch file
+Test
+
+> jruby -e 'puts "Hello"'
+Hello
