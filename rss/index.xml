@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nnn Dev]]></title><description><![CDATA[Nnn Dev Blog]]></description><link>https://nnn-dev.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 29 Jan 2017 17:41:34 GMT</lastBuildDate><atom:link href="https://nnn-dev.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[JRuby on Windows]]></title><description><![CDATA[<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I want to work on my Windows machine without installing all stuff with native ruby (compiler etc&#8230;&#8203;).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.java.com/fr/">java</a> only a jre is necessary</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_jruby">Download JRuby</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download <a href="http://jruby.org/download">the lastest zip archive of jruby</a></p>
+</div>
+<div class="paragraph">
+<p>Uncompress it into any folder</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_launch_ruby">Launch ruby</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On dos command prompt, set PATH and create a alias for ruby=jruby.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">@rem set JAVA_HOME if you want
+@rem set JAVA_HOME=xxx
+@rem where jruby was installed
+set JRUBY_PATH=xxx
+set PATH=%JRUBY_HOME%\bin;%JAVA_HOME%\bin;%PATH%
+@rem create alias for ruby
+doskey doskey ruby=jruby</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>on powershell, set PATH and create alias</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-powershell" data-lang="powershell">$env:JAVA_HOME="xxx"
+$env:JRUBY_HOME="xxx"
+$env:PATH="${env:JRUBY_HOME}\bin;${env:JAVA_HOME}\bin;${env:path}"
+New-alias ruby "$(resolve-path $env:JRUBY_HOME)\bin\jruby"
+New-alias gem "$(resolve-path $env:JRUBY_HOME)\bin\gem"
+New-alias irb "$(resolve-path $env:JRUBY_HOME)\bin\irb"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rubyenv_bat">Rubyenv.bat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I have created a batch file to easily launch a ruby environment.</p>
+</div>
+<div class="paragraph">
+<p>Download it on my
+<a href="https://gist.githubusercontent.com/nnn-dev/637fb908da5ffd11be0302ab7b885d7f/raw/rubyenv.bat">gist</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>you need to modify the path where java is installed (JAVA_HOME) if you must specify a particular jre.</p>
+</li>
+<li>
+<p>you need to modify the path where jruby was uncompressed (JRUBY_HOME)</p>
+</li>
+<li>
+<p>you can specify a working dir if you want</p>
+</li>
+<li>
+<p>you can indicate the command prompt you want to use (cmd, powershell,etc..)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With rubyenv you can launch a one-liner script ruby</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">&gt; rubyenv ruby -e "puts 'Hello'"
+Hello</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can so launch a ruby environment</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">&gt; rubyenv
+&gt; ruby -e "puts 'Hello'"
+Hello</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_associate_rb_file">Associate rb file</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to associate the rb file to launch directly, you must indicate these command with administrator rights</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">@rem Indicate jruby_home to simplify command
+set JRUBY_HOME=D:\DEV\devRuby\jruby-9.1.7.0
+@rem create a entry for rb file
+assoc .rb=rbfile
+@rem associate command with rbfile
+ftype rbfile=%JRUBY_HOME%\bin\jruby "%1" %*
+@rem associate jruby icon with rbfile
+reg add "HKEY_CLASSES_ROOT\rbfile\defaultIcon" /ve /d "%JRUBY_HOME%\bin\jrubyw.exe,0"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to unassociate rb files</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">assoc .rb=nothing
+ftype rbfile=
+reg delete "HKEY_CLASSES_ROOT\rbfile\defaultIcon" /f</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+these solutions doesn&#8217;t force JAVA_HOME. You can use rubyenv.bat with /assoc and /unassoc.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Launch the batch file
+Test</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>jruby -e 'puts "Hello"'
+Hello</p>
+</div>
+</blockquote>
+</div>
+</div>
+</div>]]></description><link>https://nnn-dev.github.io2017-XX-XX-Using-J-Rby-on-Windows.adoc</link><guid isPermaLink="true">https://nnn-dev.github.io2017-XX-XX-Using-J-Rby-on-Windows.adoc</guid><category><![CDATA[jruby]]></category><category><![CDATA[ windows]]></category><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[First Article]]></title><description><![CDATA[<div class="paragraph">
+<p>A test<br>
+a<br>
+b<br>
+c<br></p>
+</div>
+<div class="paragraph">
+<p>A test<br>
+a<br>
+b<br>
+c<br></p>
+</div>
+<div class="paragraph">
+<p>A test<br>
+a<br>
+b<br>
+c<br></p>
+</div>]]></description><link>https://nnn-dev.github.io/2016/03/10/My-first-article.html</link><guid isPermaLink="true">https://nnn-dev.github.io/2016/03/10/My-first-article.html</guid><category><![CDATA[Test]]></category><pubDate>Thu, 10 Mar 2016 00:00:00 GMT</pubDate></item></channel></rss>
