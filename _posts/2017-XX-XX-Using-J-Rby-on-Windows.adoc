@@ -84,6 +84,11 @@ assoc .rb=nothing
 ftype rbfile=
 reg delete "HKEY_CLASSES_ROOT\rbfile\defaultIcon" /f
 
-NOTE: thess solutions doesn't force JAVA_HOME. You can use +rubyenv.bat+ with +/assoc+ and +/unassoc+.
+NOTE: these solutions doesn't force JAVA_HOME. You can use +rubyenv.bat+ with +/assoc+ and +/unassoc+.
 
 
+Launch the batch file
+Test
+
+> jruby -e 'puts "Hello"'
+Hello
