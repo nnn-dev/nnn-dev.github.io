@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nnn Dev]]></title><description><![CDATA[Nnn Dev Blog]]></description><link>https://nnn-dev.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 29 Jan 2017 17:41:34 GMT</lastBuildDate><atom:link href="https://nnn-dev.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[JRuby on Windows]]></title><description><![CDATA[<div class="sect1">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nnn Dev]]></title><description><![CDATA[Nnn Dev Blog]]></description><link>https://nnn-dev.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 29 Jan 2017 17:44:08 GMT</lastBuildDate><atom:link href="https://nnn-dev.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[JRuby on Windows]]></title><description><![CDATA[<div class="sect1">
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -161,21 +161,4 @@ Hello</p>
 </blockquote>
 </div>
 </div>
-</div>]]></description><link>https://nnn-dev.github.io2017-XX-XX-Using-J-Rby-on-Windows.adoc</link><guid isPermaLink="true">https://nnn-dev.github.io2017-XX-XX-Using-J-Rby-on-Windows.adoc</guid><category><![CDATA[jruby]]></category><category><![CDATA[ windows]]></category><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[First Article]]></title><description><![CDATA[<div class="paragraph">
-<p>A test<br>
-a<br>
-b<br>
-c<br></p>
-</div>
-<div class="paragraph">
-<p>A test<br>
-a<br>
-b<br>
-c<br></p>
-</div>
-<div class="paragraph">
-<p>A test<br>
-a<br>
-b<br>
-c<br></p>
-</div>]]></description><link>https://nnn-dev.github.io/2016/03/10/My-first-article.html</link><guid isPermaLink="true">https://nnn-dev.github.io/2016/03/10/My-first-article.html</guid><category><![CDATA[Test]]></category><pubDate>Thu, 10 Mar 2016 00:00:00 GMT</pubDate></item></channel></rss>
+</div>]]></description><link>https://nnn-dev.github.io2017-XX-XX-Using-J-Rby-on-Windows.adoc</link><guid isPermaLink="true">https://nnn-dev.github.io2017-XX-XX-Using-J-Rby-on-Windows.adoc</guid><category><![CDATA[jruby]]></category><category><![CDATA[ windows]]></category><pubDate>Invalid Date</pubDate></item></channel></rss>
