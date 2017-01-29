@@ -1,5 +1,5 @@
 = JRuby on Windows
-:published_at: 2017-XX-XX
+:published_at: 2017-01-29
 :hp-tags: jruby, windows
 :hp-alt-title: Using JRuby on Windows
 
