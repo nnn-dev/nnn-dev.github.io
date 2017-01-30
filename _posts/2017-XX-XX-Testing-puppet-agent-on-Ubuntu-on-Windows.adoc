@@ -1,0 +1,104 @@
+= Puppet-agent on Ubuntu on Windows
+:published_at: 2017-XX-XX
+:hp-tags: puppet, jruby, windows
+:hp-alt-title: Testing puppet-agent on Ubuntu on Windows
+
+== Preparation
+
+*puppet-agent* installation need +git+ and +Ruby+.
+
+I use on my Windows (not on bash) : 
+
+* Git Shell (from Github Desktop)
+* JRuby 9
+
+== Installing puppet-agent
+
+Clone it from github
+
+[source,dos]
+> git clone https://github.com/puppetlabs/puppet-agent.git
+
+This project use +bundler+ to install it. We need install this stuff.
+
+[source,dos]
+> gem install bundler
+> cd puppet-agent
+> build install
+
+IMPORTANT:
+If you have this error, you must update *rubygems*
+[source]
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+    can't modify frozen String+
+> gem update --system
+
+== Activate ssh on Ubuntu on Windows
+
+I install a openssh server on Ubuntu on Windows.
+I cannot use the port 22 because a Windows 10 has soon https://www.reddit.com/r/Windows10/comments/4w4sew/windows_10_has_a_native_ssh_server/[a ssh server].
+
+First create a ssh key on Windows
+[source]
+> ssh-keygen
+
+Then install and configure openssh on bash
+[source]
+> bash
+$ sudo su -
+$ apt-get install openssh-server
+#Modify /etc/ssh/sshd_config
+$ vi /etc/ssh/sshd_config
+Port 2222
+UsePrivilegeSeparation no
+$ service ssh --full-restart
+#Add the ssh key for root
+$ touch /root/.ssh/authorized_keys
+$ chmod 0600 /root/.ssh/authorized_keys
+$ cat /mnt/c/Users/you/.ssh/id_rsa.pub >>/root/.ssh/authorized_keys
+$ exit
+
+Thanks to http://superuser.com/a/1114162 for the +UsePrivilegeSeparation  on+ options.
+
+Test on windows
+[source,dos]
+> ssh -p 2222 root@127.0.0.1
+
+== Test build
+
+=== First Launch
+First launch of puppet-agent.
+I need to indicate the port of the openssh. I indicate it on hostname.
+TODO: find a better way.
+
+[source]
+> bundle exec build puppet-agent ubuntu-14.04-amd64 "127.0.0.1 -p 2222"
+Error loading project 'puppet-agent' using 'D:/DEV/devRuby/puppet-agent/configs/projects/puppet-agent.rb':
+undefined local variable or method `dirname' for #<Vanagon::Project::DSL:0x159fad4>
+org/jruby/RubyBasicObject.java:1653:in `method_missing'
+
+After investigate it, the problem was on https://github.com/schacon/ruby-git/issues/179[ruby-git].
+
+Modify line 1003 on %JRUBY_HOME%\lib\ruby\gems\shared\gems\git-1.3.0\lib\git\lib.rb
+[source,ruby]
+return "'#{s && s.to_s.gsub('\'','\'"\'"\'')}'" if RUBY_PLATFORM !~ /mingw|mswin/ and ENV['OS']!='Windows_NT'
+
+=== Second launch
+
+[source]
+> bundle exec build puppet-agent ubuntu-14.04-amd64 "127.0.0.1 -p 2222"
+Could not find 'ssh'. Please install (or ensure it is on $PATH), and try again.
+
+I have ssh but I am on Windows and the executable is ssh.exe.
+TODO: report it
+
+Add after line 120 on %JRUBY_HOME%\lib\ruby\gems\shared\gems\vanagon-0.8.2\lib\vanagon\utilities.rb
+[source,ruby]
+if RUBY_PLATFORM =~ /mingw|mswin/ or ENV['OS']=='Windows_NT'
+	location = File.join(path_elem, "#{command}.exe")
+    return location if FileTest.executable?(location)	
+end
+
+=== Third launch
+
+TODO: Don't use *pl*-stuff
