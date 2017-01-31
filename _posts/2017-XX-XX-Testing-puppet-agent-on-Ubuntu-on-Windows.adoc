@@ -112,3 +112,9 @@ driver 72
     def list_build_dependencies
       (@project.components.map(&:build_requires).flatten.uniq - @project.components.map(&:name)).collect{|x| x.sub(/pl-/,'')}
     end
+
+===
+
+puppet-agent.rb
+line 294 comment
+proj.register_rewrite_rule 'http', 'http://buildsources.delivery.puppetlabs.net'
