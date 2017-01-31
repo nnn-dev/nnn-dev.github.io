@@ -102,3 +102,13 @@ end
 === Third launch
 
 TODO: Don't use *pl*-stuff
+
+project 322
+def list_component_dependencies(component)
+      component.build_requires.select { |dep| @components.map(&:name).include?(dep) }.collect{|x| x.sub(/^pl-/,'')}
+    end
+
+driver 72
+    def list_build_dependencies
+      (@project.components.map(&:build_requires).flatten.uniq - @project.components.map(&:name)).collect{|x| x.sub(/pl-/,'')}
+    end
