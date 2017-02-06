@@ -135,3 +135,8 @@ rubygem-locale
 
 cwRsync
 set PATH
+/etc/fstab
+none /cygdrive cygdrive binary,posix=0,user,noacl 0 0
+
+deltacopy
+chmod 0600 id_rsa
