@@ -69,7 +69,7 @@ Test on windows
 === First Launch
 First launch of puppet-agent.
 I need to indicate the port of the openssh. I indicate it on hostname.
-TODO: find a better way.
+TODO: find a better way.(ENV[SSH_PORT]?)
 
 [source]
 > bundle exec build puppet-agent ubuntu-14.04-amd64 "127.0.0.1 -p 2222"
@@ -118,3 +118,20 @@ driver 72
 puppet-agent.rb
 line 294 comment
 proj.register_rewrite_rule 'http', 'http://buildsources.delivery.puppetlabs.net'
+
+proj.register_rewrite_rule 'git', Proc.new { |url|
+    match = url.match(/github.com\/(.*)$/)
+    "git://github.delivery.puppetlabs.net/#{match[1].gsub('/', '-')}" if match
+  }
+
+rubygem-locale
+  pkg.version "2.1.2"
+  pkg.md5sum "def1e89d1d3126a0c684d3b7b20d88d4"
+
+=== VANAGON_LOCATION
+
+=file:/../vanagon
+=== rsync
+
+cwRsync
+set PATH
