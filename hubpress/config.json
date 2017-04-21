@@ -1,1 +1,35 @@
-{"meta":{"username":"nnn-dev","repositoryName":"nnn-dev.github.io","branch":"master"},"site":{"title":"Nnn Dev","description":"Nnn Dev Blog","url":"https://nnn-dev.github.io"},"socialnetwork":{"github":"https://github.com/nnn-dev"},"theme":{"name":"Casper","url":"//nnn-dev.github.io/themes/Casper"}}
+{
+  "meta": {
+    "username": "nnn-dev",
+    "repositoryName": "nnn-dev.github.io",
+    "branch": "master"
+  },
+  "site": {
+    "title": "Nnn Dev",
+    "description": "Nnn Dev Blog",
+    "url": "https://nnn-dev.github.io"
+  },
+  "socialnetwork": {
+    "github": "https://github.com/nnn-dev"
+  },
+  "theme": {
+    "name": "casper",
+    "url": "//nnn-dev.github.io/themes/Casper"
+  },
+  "urls": {
+    "site": "https://nnn-dev.github.io",
+    "hubpress": "http://nnn-dev.github.io",
+    "theme": "//nnn-dev.github.io/themes/casper",
+    "images": "https://nnn-dev.github.io/images"
+  },
+  "initialisationConfigComponent": {
+    "name": "initialise-configuration",
+    "computed": {},
+    "methods": {},
+    "staticRenderFns": [
+      null,
+      null,
+      null
+    ]
+  }
+}
