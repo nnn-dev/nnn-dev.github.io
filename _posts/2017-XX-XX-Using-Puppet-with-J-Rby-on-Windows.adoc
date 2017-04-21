@@ -28,12 +28,19 @@ Dependencies:
 
 * win32-dir
 * win32-security
+* win32-process
+* jruby-win32ole
+* win32-service
 
 [source,dos]
 > gem install win32-dir
 > gem install win32-security
+> gem install win32-process
+> gem install jruby-win32ole
+> gem install win32-service
 
 Test it
+
 [source,dos]
 > puppet --version
 NameError: undefined method `read_uint32' for class `FFI::Pointer'
