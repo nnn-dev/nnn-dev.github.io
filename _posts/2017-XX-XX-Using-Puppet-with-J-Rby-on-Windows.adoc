@@ -1,0 +1,46 @@
+= Puppet, JRuby and Windows
+:published_at: 2017-XX-XX
+:hp-tags: jruby, windows, puppet
+:hp-alt-title: Using Puppet with JRuby on Windows
+
+== Introduction
+
+https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html[In my previous post], I have installed JRuby on Windows.
+I want to use it to test puppet without installed it.
+
+== Installing Puppet
+
+Install puppet as a gem
+[source,dos]
+> gem install puppet
+
+Test it
+[source,dos]
+> puppet --version
+no such file to load -- win32/dir
+
+== Installing dependencies
+
+Some specific dependencies for Windows are needed for Puppet on Windows.
+These dependencies are not installed automatically.
+
+Dependencies:
+
+* win32-dir
+* win32-security
+
+[source,dos]
+> gem install win32-dir
+> gem install win32-security
+
+Test it
+[source,dos]
+> puppet --version
+NameError: undefined method `read_uint32' for class `FFI::Pointer'
+
+== JRuby-FFI vs Ruby-FFI
+
+FFI is embedded with JRuby but it is not the same as https://rubygems.org/gems/ffi[ffi] gem.
+
+
+
