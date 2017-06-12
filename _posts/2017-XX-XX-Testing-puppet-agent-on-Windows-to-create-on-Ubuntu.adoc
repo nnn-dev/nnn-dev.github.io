@@ -148,7 +148,9 @@ You must create each tool. Actually the list is:
 > cd pl-build-tools-vanagon
 > ruby ..\go.rb pl-xxx ubuntu-14.04-amd64 127.0.0.1:2222
 
-
+Unlike the original script, the ruby script *go.rb* install the generated package on the machine at the end.
+This is necessary for building others packages. 
+(Original script use an url not allowed outside puppetlabs)
 
 
 > cd ..
