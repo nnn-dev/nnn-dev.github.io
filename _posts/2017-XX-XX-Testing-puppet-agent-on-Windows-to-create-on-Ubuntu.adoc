@@ -128,9 +128,8 @@ You must create each tool. Actually the list is:
 . pl-tar
 . pl-toolchain 
 . pl-gcc 
-. pl-build-tools 
-. pl-binutils
 . pl-boost 
+. pl-binutils
 . pl-cmake
 . pl-gdbm 
 . pl-gettext 
