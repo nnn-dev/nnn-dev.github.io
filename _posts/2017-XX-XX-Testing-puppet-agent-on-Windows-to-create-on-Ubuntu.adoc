@@ -123,25 +123,26 @@ Copy it directly on `puppet-agent-on-windows` directory.
 First you need to create the tools with *pl-build-tools-vanagon*
 
 You must create each tool. Actually the list is:
-* pl-autotools
-* pl-binutils
-* pl-boost 
-* pl-build-tools 
-* pl-cmake
-* pl-gcc 
-* pl-gdbm 
-* pl-gettext 
-* pl-iconv
-* pl-libffi
-* pl-make
-* pl-pdcurses
-* pl-pkg-config 
-* pl-ruby
-* pl-rust 
-* pl-tar
-* pl-toolchain 
-* pl-yaml-cpp 
-* pl-zlib
+
+. pl-autotools
+. pl-tar
+. pl-toolchain 
+. pl-gcc 
+. pl-build-tools 
+. pl-binutils
+. pl-boost 
+. pl-cmake
+. pl-gdbm 
+. pl-gettext 
+. pl-iconv
+. pl-libffi
+. pl-make
+. pl-pdcurses
+. pl-pkg-config 
+. pl-ruby
+. pl-rust 
+. pl-yaml-cpp 
+. pl-zlib
  
 [source,dos]
 > cd pl-build-tools-vanagon
