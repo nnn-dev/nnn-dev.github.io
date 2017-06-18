@@ -1,7 +1,7 @@
-= Create Ubuntu Puppet-agent on Windows
+= Create Ubuntu Puppet-agent package on Windows
 :published_at: 2017-XX-XX
 :hp-tags: puppet, jruby, windows
-:hp-alt-title: Testing puppet-agent on Windows to create on Ubuntu
+:hp-alt-title: Testing puppet-agent on Windows to create Ubuntu package
 
 == Toolbox
 
@@ -47,6 +47,19 @@ UsePrivilegeSeparation no
 #
 #Run openssh
 $ service ssh --full-restart
+
+If you have this error:
+[source]
+ * Stopping OpenBSD Secure Shell server sshd                                 [ OK ]
+ * Starting OpenBSD Secure Shell server sshd                                        Could not load host key: /etc/ssh/ssh_host_rsa_key
+Could not load host key: /etc/ssh/ssh_host_dsa_key
+Could not load host key: /etc/ssh/ssh_host_ecdsa_key
+Could not load host key: /etc/ssh/ssh_host_ed25519_key
+                                                                             [ OK ]
+Launch reconfiguration
+[source]
+$ sudo dpkg-reconfigure openssh-server 
+
 #
 #Add the ssh key for root
 $ touch /root/.ssh/authorized_keys
@@ -122,38 +135,31 @@ Copy it directly on `puppet-agent-on-windows` directory.
 
 First you need to create the tools with *pl-build-tools-vanagon*
 
-You must create each tool. Actually the list is:
+You must create each tool. Actually the list for ubuntu-14 is:
 
-. pl-autotools
-. pl-tar
-. pl-toolchain 
-. pl-gcc 
-. pl-boost 
-. pl-make
-. pl-iconv
-. pl-binutils
+. pl-gcc
+. pl-boost
 . pl-cmake
-. pl-gdbm 
-. pl-gettext 
-. pl-libffi
-. pl-pdcurses
-. pl-pkg-config 
-. pl-ruby
-. pl-rust 
+. pl-binutils
 . pl-yaml-cpp 
-. pl-zlib
  
 [source,dos]
 > cd pl-build-tools-vanagon
-> ruby ..\go.rb pl-xxx ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-gcc ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-boost ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-cmake ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-binutils ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-yaml-cpp ubuntu-14.04-amd64 127.0.0.1:2222
+> cd ..
 
-Unlike the original script, the ruby script *go.rb* install the generated package on the machine at the end.
+Unlike the original script, the ruby script *vanagon.rb* install the generated package on the machine at the end.
 This is necessary for building others packages. 
 (Original script use an url not allowed outside puppetlabs)
 
 
-> cd ..
+Now you can build the puppet-agent
+
 > cd puppet-agent
-> ruby ..\go.rb puppet-agent ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb puppet-agent ubuntu-14.04-amd64 127.0.0.1:2222
 > cd ..
 
