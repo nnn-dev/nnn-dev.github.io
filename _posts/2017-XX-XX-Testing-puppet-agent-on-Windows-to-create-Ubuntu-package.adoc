@@ -24,7 +24,7 @@ See https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html[my previous
 
 You must have a *ssh client*. I use the *ssh.exe* provided by  https://desktop.github.com/[Github Desktop]
 
-My *ssh client* must have a key to connect directly to 
+My *ssh client* must have a key to connect directly to my target.
 
 First create a ssh key on Windows
 [source]
@@ -81,9 +81,9 @@ On Windows, there are not pure implementation of rsync.
 
 I use https://www.itefix.net/content/cwrsync-free-edition[*cwRsync* Free Edition] because it embeded the cygwin implementation of rsync.
 
-I have created a [batch script (rsync.bat) to transpose _Windows path_ to *cygwin path* and not using the _ssh with Github_ but the *ssh embeded with cwrsync*
+I have created a [batch script (rsync.bat)] to transpose _Windows path_ to *cygwin path* and not using the _ssh with Github_ but the *ssh embeded with cwrsync*
 
-Copy it directly on `puppet-agent-on-windows` directory (see below).
+Copy it directly on `puppet-agent-on-windows` (the working directory) (see below how to create it).
 
 
 
@@ -101,10 +101,10 @@ First we get *pl-build-tools-vanagon*
 [source,dos]
 > git clone https://github.com/puppetlabs/pl-build-tools-vanagon.git
 
-Secondly we clone the *stable* branch from github
+Secondly we clone https://github.com/puppetlabs/puppet-agent/releases[the *last revision* branch] of *puppet-agent* from github
 
 [source,dos]
-> git clone -b stable https://github.com/puppetlabs/puppet-agent.git
+> git clone -b 5.3.2 https://github.com/puppetlabs/puppet-agent.git
 
 These projects use +bundler+ to install it. We need install this stuff.
 
@@ -133,7 +133,7 @@ Copy it directly on `puppet-agent-on-windows` directory.
 
 == Pl-build-tools-vanagon
 
-First you need to create the tools with *pl-build-tools-vanagon*
+First you need to create tools with *pl-build-tools-vanagon*
 
 You must create each tool. Actually the list for ubuntu-14 is:
 
