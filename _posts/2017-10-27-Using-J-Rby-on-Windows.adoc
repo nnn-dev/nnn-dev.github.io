@@ -1,5 +1,5 @@
 = JRuby on Windows
-:published_at: 2017-01-29
+:published_at: 2017-10-27
 :hp-tags: jruby, windows
 :hp-alt-title: Using JRuby on Windows
 
@@ -43,12 +43,13 @@ New-alias irb "$(resolve-path $env:JRUBY_HOME)\bin\irb"
 I have created a batch file to easily launch a ruby environment.
 
 Download it on my 
-https://gist.githubusercontent.com/nnn-dev/637fb908da5ffd11be0302ab7b885d7f/raw/rubyenv.bat[gist].
+https://gist.githubusercontent.com/nnn-dev/d5add1bfd8aab5c6981284d86ec0d254/raw/rubyenv.bat[gist (rubyenv.bat)].
 
-* you need to modify the path where java is installed (JAVA_HOME) if you must specify a particular jre.
-* you need to modify the path where jruby was uncompressed (JRUBY_HOME)
+Create a https://gist.githubusercontent.com/nnn-dev/d5add1bfd8aab5c6981284d86ec0d254/raw/rubyenv.ini[rubyenv.ini] on the same folder:
+* you need to indicate the path where java is installed (JAVA_HOME) if you must specify a particular jre.
+* you need to indicate the path where jruby was uncompressed (JRUBY_HOME)
 * you can specify a working dir if you want
-* you can indicate the command prompt you want to use (cmd, powershell,etc..)
+* you can modify the command prompt you want to use (cmd, powershell,etc..)
 
 With +rubyenv+ you can launch a one-liner script ruby
 
@@ -65,7 +66,7 @@ Hello
 
 == Associate rb file
 
-If you want to associate the rb file to launch directly, you must indicate these command with administrator rights
+If you want to associate the rb file to launch directly, you must indicate these commands with administrator rights
 
 [source,dos]
 @rem Indicate jruby_home to simplify command
