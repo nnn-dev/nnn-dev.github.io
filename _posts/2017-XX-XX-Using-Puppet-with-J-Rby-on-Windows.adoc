@@ -5,7 +5,7 @@
 
 == Introduction
 
-https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html[In my previous post], I have installed JRuby on Windows.
+https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html[In my previous post], I have installed JRuby on Windows.
 I want to use it to test puppet without installed it.
 
 == Installing Puppet
@@ -13,27 +13,6 @@ I want to use it to test puppet without installed it.
 Install puppet as a gem
 [source,dos]	
 > gem install puppet
-
-Test it
-[source,dos]
-> puppet --version
-no such file to load -- win32/dir
-
-== Installing dependencies
-
-Some specific dependencies for Windows are needed for Puppet on Windows.
-These dependencies are not installed automatically.
-
-Dependencies:
-
-* win32-dir
-* win32-security
-* win32-process
-* jruby-win32ole
-* win32-service
-
-[source,dos]
-> gem install win32-dir win32-security win32-process jruby-win32ole win32-service
 
 Test it
 
@@ -86,17 +65,47 @@ load Gem.activate_bin_path('puppet', 'puppet', version)
 Test it
 
 [source,dos]
+> puppet --version
+no such file to load -- win32/process
+
+== Installing dependencies
+
+Some specific dependencies for Windows are needed for Puppet on Windows.
+These dependencies are not installed automatically.
+
+Dependencies:
+* win32-dir
+* win32-security
+* win32-process
+* jruby-win32ole
+* win32-service
+
+[source,dos]
+> gem install win32-dir win32-process jruby-win32ole
+> gem install win32-security -v 0.4.0
+> gem install win32-service -v 0.8.8
+
+We don't install the last version of win32-service and win32-security because its depends of ffi-win32-extensions (not compatible with puppet).
+
+Test it
+
+[source,dos]
+> puppet --version
+[...]
+5.3.2
+
+It works! But with some warnings...
+
+== Remove warnings ==
+
+If you are some warnings like
+
+[source,dos]
 interpolation_support.rb:43: warning: `-' after local variable or literal is int
 interpolation_support.rb:43: warning: even though it seems like unary operator
 interpolation_support.rb:84: warning: `+' after local variable or literal is int
 interpolation_support.rb:84: warning: even though it seems like unary operator
 interpolation_support.rb:84: warning: `-' after local variable or literal is int
-[...]
-4.10.0
-
-It works! But with some warnings...
-
-== Remove warnings ==
 
 You can remove warnings with launching ruby with verbose level to *0*.
 
