@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nnn Dev]]></title><description><![CDATA[Nnn Dev Blog]]></description><link>https://nnn-dev.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 29 Jan 2017 17:51:11 GMT</lastBuildDate><atom:link href="https://nnn-dev.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[JRuby on Windows]]></title><description><![CDATA[<div class="sect1">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nnn Dev]]></title><description><![CDATA[Nnn Dev Blog]]></description><link>https://nnn-dev.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 27 Oct 2017 21:46:03 GMT</lastBuildDate><atom:link href="https://nnn-dev.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[JRuby on Windows]]></title><description><![CDATA[<div class="sect1">
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -69,23 +69,14 @@ New-alias irb "$(resolve-path $env:JRUBY_HOME)\bin\irb"</code></pre>
 </div>
 <div class="paragraph">
 <p>Download it on my
-<a href="https://gist.githubusercontent.com/nnn-dev/637fb908da5ffd11be0302ab7b885d7f/raw/rubyenv.bat">gist</a>.</p>
+<a href="https://gist.githubusercontent.com/nnn-dev/d5add1bfd8aab5c6981284d86ec0d254/raw/rubyenv.bat">gist (rubyenv.bat)</a>.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>you need to modify the path where java is installed (JAVA_HOME) if you must specify a particular jre.</p>
-</li>
-<li>
-<p>you need to modify the path where jruby was uncompressed (JRUBY_HOME)</p>
-</li>
-<li>
-<p>you can specify a working dir if you want</p>
-</li>
-<li>
-<p>you can indicate the command prompt you want to use (cmd, powershell,etc..)</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Create a <a href="https://gist.githubusercontent.com/nnn-dev/d5add1bfd8aab5c6981284d86ec0d254/raw/rubyenv.ini">rubyenv.ini</a> on the same folder:
+* you need to indicate the path where java is installed (JAVA_HOME) if you must specify a particular jre.
+* you need to indicate the path where jruby was uncompressed (JRUBY_HOME)
+* you can specify a working dir if you want
+* you can modify the command prompt you want to use (cmd, powershell,etc..)</p>
 </div>
 <div class="paragraph">
 <p>With rubyenv you can launch a one-liner script ruby</p>
@@ -112,7 +103,7 @@ Hello</code></pre>
 <h2 id="_associate_rb_file">Associate rb file</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to associate the rb file to launch directly, you must indicate these command with administrator rights</p>
+<p>If you want to associate the rb file to launch directly, you must indicate these commands with administrator rights</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -149,4 +140,4 @@ these solutions doesn&#8217;t force JAVA_HOME. You can use rubyenv.bat with /ass
 </table>
 </div>
 </div>
-</div>]]></description><link>https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html</link><guid isPermaLink="true">https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html</guid><category><![CDATA[jruby]]></category><category><![CDATA[ windows]]></category><pubDate>Sun, 29 Jan 2017 00:00:00 GMT</pubDate></item></channel></rss>
+</div>]]></description><link>https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html</link><guid isPermaLink="true">https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html</guid><category><![CDATA[jruby]]></category><category><![CDATA[windows]]></category><pubDate>Fri, 27 Oct 2017 00:00:00 GMT</pubDate></item></channel></rss>

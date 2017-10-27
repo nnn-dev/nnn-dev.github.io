@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>JRuby on Windows</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://nnn-dev.github.io/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//nnn-dev.github.io/themes/casper/assets/css/screen.css?v=1509140763699" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Nnn Dev" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="JRuby on Windows" />
+    <meta property="og:description" content="Introduction I want to work on my Windows machine without installing all stuff with native ruby (compiler etc&amp;#8230;&amp;#8203;). Prerequisites java only a jre is necessary Download JRuby Download the lastest zip archive of jruby Uncompress it into any folder Launch ruby On dos command prompt, set PATH and" />
+    <meta property="og:url" content="https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html" />
+    <meta property="article:published_time" content="2017-10-27T00:00:00.000Z" />
+    <meta property="article:tag" content="jruby" />
+    <meta property="article:tag" content="windows" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JRuby on Windows" />
+    <meta name="twitter:description" content="Introduction I want to work on my Windows machine without installing all stuff with native ruby (compiler etc&amp;#8230;&amp;#8203;). Prerequisites java only a jre is necessary Download JRuby Download the lastest zip archive of jruby Uncompress it into any folder Launch ruby On dos command prompt, set PATH and" />
+    <meta name="twitter:url" content="https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Nnn Dev",
+    "author": {
+        "@type": "Person",
+        "name": "nnn-dev",
+        "image": "https://avatars3.githubusercontent.com/u/5897007?v=4",
+        "url": "https://nnn-dev.github.io/author/nnn-dev/",
+        "sameAs": "http://nnn-dev.github.io"
+    },
+    "headline": "JRuby on Windows",
+    "url": "https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html",
+    "datePublished": "2017-10-27T00:00:00.000Z",
+    "keywords": "jruby, windows",
+    "description": "Introduction I want to work on my Windows machine without installing all stuff with native ruby (compiler etc&amp;#8230;&amp;#8203;). Prerequisites java only a jre is necessary Download JRuby Download the lastest zip archive of jruby Uncompress it into any folder Launch ruby On dos command prompt, set PATH and"
+}
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="Nnn Dev" href="https://nnn-dev.github.io/rss/" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+    
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+</head>
+<body class="post-template tag-jruby tag-windows nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-jruby tag-windows">
+
+        <header class="post-header">
+            <h1 class="post-title">JRuby on Windows</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2017-10-27">27 October 2017</time>  on <a href="https://nnn-dev.github.io/tag/jruby/">jruby</a>, <a href="https://nnn-dev.github.io/tag/windows/">windows</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I want to work on my Windows machine without installing all stuff with native ruby (compiler etc&#8230;&#8203;).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.java.com/fr/">java</a> only a jre is necessary</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_jruby">Download JRuby</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download <a href="http://jruby.org/download">the lastest zip archive of jruby</a></p>
+</div>
+<div class="paragraph">
+<p>Uncompress it into any folder</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_launch_ruby">Launch ruby</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On dos command prompt, set PATH and create a alias for ruby=jruby.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">@rem set JAVA_HOME if you want
+@rem set JAVA_HOME=xxx
+@rem where jruby was installed
+set JRUBY_PATH=xxx
+set PATH=%JRUBY_HOME%\bin;%JAVA_HOME%\bin;%PATH%
+@rem create alias for ruby
+doskey doskey ruby=jruby</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>on powershell, set PATH and create alias</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-powershell" data-lang="powershell">$env:JAVA_HOME="xxx"
+$env:JRUBY_HOME="xxx"
+$env:PATH="${env:JRUBY_HOME}\bin;${env:JAVA_HOME}\bin;${env:path}"
+New-alias ruby "$(resolve-path $env:JRUBY_HOME)\bin\jruby"
+New-alias gem "$(resolve-path $env:JRUBY_HOME)\bin\gem"
+New-alias irb "$(resolve-path $env:JRUBY_HOME)\bin\irb"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rubyenv_bat">Rubyenv.bat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I have created a batch file to easily launch a ruby environment.</p>
+</div>
+<div class="paragraph">
+<p>Download it on my
+<a href="https://gist.githubusercontent.com/nnn-dev/d5add1bfd8aab5c6981284d86ec0d254/raw/rubyenv.bat">gist (rubyenv.bat)</a>.</p>
+</div>
+<div class="paragraph">
+<p>Create a <a href="https://gist.githubusercontent.com/nnn-dev/d5add1bfd8aab5c6981284d86ec0d254/raw/rubyenv.ini">rubyenv.ini</a> on the same folder:
+* you need to indicate the path where java is installed (JAVA_HOME) if you must specify a particular jre.
+* you need to indicate the path where jruby was uncompressed (JRUBY_HOME)
+* you can specify a working dir if you want
+* you can modify the command prompt you want to use (cmd, powershell,etc..)</p>
+</div>
+<div class="paragraph">
+<p>With rubyenv you can launch a one-liner script ruby</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">&gt; rubyenv ruby -e "puts 'Hello'"
+Hello</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can so launch a ruby environment</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">&gt; rubyenv
+&gt; ruby -e "puts 'Hello'"
+Hello</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_associate_rb_file">Associate rb file</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to associate the rb file to launch directly, you must indicate these commands with administrator rights</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">@rem Indicate jruby_home to simplify command
+set JRUBY_HOME=D:\DEV\devRuby\jruby-9.1.7.0
+@rem create a entry for rb file
+assoc .rb=rbfile
+@rem associate command with rbfile
+ftype rbfile=%JRUBY_HOME%\bin\jruby "%1" %*
+@rem associate jruby icon with rbfile
+reg add "HKEY_CLASSES_ROOT\rbfile\defaultIcon" /ve /d "%JRUBY_HOME%\bin\jrubyw.exe,0"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to unassociate rb files</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dos" data-lang="dos">assoc .rb=nothing
+ftype rbfile=
+reg delete "HKEY_CLASSES_ROOT\rbfile\defaultIcon" /f</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+these solutions doesn&#8217;t force JAVA_HOME. You can use rubyenv.bat with /assoc and /unassoc.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="https://nnn-dev.github.io/author/nnn-dev/" style="background-image: url(https://avatars3.githubusercontent.com/u/5897007?v&#x3D;4)"><span class="hidden">nnn-dev's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="https://nnn-dev.github.io/author/nnn-dev/">nnn-dev</a></h4>
+
+                    <p>Read <a href="https://nnn-dev.github.io/author/nnn-dev/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    <span class="author-link icon-link"><a href="http://nnn-dev.github.io">http://nnn-dev.github.io</a></span>
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=JRuby%20on%20Windows&amp;url=https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://nnn-dev.github.io/2017/10/27/Using-J-Rby-on-Windows.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="https://nnn-dev.github.io">Nnn Dev</a> &copy; 2017</section>
+            <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    <script type="text/javascript" src="//nnn-dev.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1509140763699"></script>
+    <script type="text/javascript" src="//nnn-dev.github.io/themes/casper/assets/js/index.js?v=1509140763699"></script>
+
+</body>
+</html>
