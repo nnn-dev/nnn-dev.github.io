@@ -1,0 +1,165 @@
+= Create Ubuntu Puppet-agent package on Windows
+:published_at: 2017-XX-XX
+:hp-tags: puppet, jruby, windows
+:hp-alt-title: Testing puppet-agent on Windows to create Ubuntu package
+
+== Toolbox
+
+Puppet-agent need some utilities not found directly on Windows (ruby, git, ssh, rsync...)
+
+=== Ruby
+
+I use *JRuby 9* (java needed)
+
+See https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html[my previous post (Using JRuby on Windows)] to have *git* and *ruby* on command line.
+
+=== Git
+
+I use https://desktop.github.com/[Github Desktop] for git.
+You must have the *git* command directly on `PATH`.
+
+See https://nnn-dev.github.io/2017/01/29/Using-J-Rby-on-Windows.html[my previous post (Using JRuby on Windows)] to have *git* and *ruby* on command line.
+
+=== Ssh client/server
+
+You must have a *ssh client*. I use the *ssh.exe* provided by  https://desktop.github.com/[Github Desktop]
+
+My *ssh client* must have a key to connect directly to 
+
+First create a ssh key on Windows
+[source]
+> ssh-keygen
+
+
+My test target is https://msdn.microsoft.com/en-us/commandline/wsl/about[Bash on Ubuntu on Windows]. 
+I must install a openssh server on it. But I use the 2222 port because https://www.reddit.com/r/Windows10/comments/4w4sew/windows_10_has_a_native_ssh_server/[Windows 10 use a ssh server].
+
+How I have installed and configured openssh on bash
+[source]
+> bash
+$ sudo su -
+$ apt-get install openssh-server
+#
+#Modify /etc/ssh/sshd_config
+$ vi /etc/ssh/sshd_config
+Port 2222
+UsePrivilegeSeparation no
+#
+#Run openssh
+$ service ssh --full-restart
+
+If you have this error:
+[source]
+ * Stopping OpenBSD Secure Shell server sshd                                 [ OK ]
+ * Starting OpenBSD Secure Shell server sshd                                        Could not load host key: /etc/ssh/ssh_host_rsa_key
+Could not load host key: /etc/ssh/ssh_host_dsa_key
+Could not load host key: /etc/ssh/ssh_host_ecdsa_key
+Could not load host key: /etc/ssh/ssh_host_ed25519_key
+                                                                             [ OK ]
+Launch reconfiguration
+[source]
+$ sudo dpkg-reconfigure openssh-server 
+
+#
+#Add the ssh key for root
+$ touch /root/.ssh/authorized_keys
+$ chmod 0600 /root/.ssh/authorized_keys
+#WARNING: below change the path with your personnal Windows HOME
+$ cat /mnt/c/Users/you/.ssh/id_rsa.pub >>/root/.ssh/authorized_keys
+
+NOTE: Thanks to http://superuser.com/a/1114162 for the +UsePrivilegeSeparation  on+ options.
+
+
+Test it direclty on windows
+[source,dos]
+> ssh -p 2222 root@127.0.0.1
+# exit
+
+=== Rsync
+
+On Windows, there are not pure implementation of rsync.
+
+I use https://www.itefix.net/content/cwrsync-free-edition[*cwRsync* Free Edition] because it embeded the cygwin implementation of rsync.
+
+I have created a [batch script (rsync.bat) to transpose _Windows path_ to *cygwin path* and not using the _ssh with Github_ but the *ssh embeded with cwrsync*
+
+Copy it directly on `puppet-agent-on-windows` directory (see below).
+
+
+
+== Preparing and installing
+
+NOTE : To compiling *puppet-agent*, you must have some utilities build by Puppetlabs.
+These versions are created with *pl-build-tools-vanagon*
+
+We create a parent directory.
+
+[source,dos]
+> mkdir puppet-agent-on-windows
+
+First we get *pl-build-tools-vanagon*
+[source,dos]
+> git clone https://github.com/puppetlabs/pl-build-tools-vanagon.git
+
+Secondly we clone the *stable* branch from github
+
+[source,dos]
+> git clone -b stable https://github.com/puppetlabs/puppet-agent.git
+
+These projects use +bundler+ to install it. We need install this stuff.
+
+[source,dos]
+> gem install bundler
+> cd pl-build-tools-vanagon
+> bundler install
+> cd ..
+> cd puppet-agent
+> bundler install
+> cd..
+
+IMPORTANT:
+If you have this error, you must update *rubygems*
+[source]
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+    can't modify frozen String+
+> gem update --system
+
+=== Patching
+
+*Pl-build-tools-vanagon* and *Puppet-agent* were not made to run on *Windows host* with the target `Bash on Ubuntu on Windows`
+
+I have make a [ruby script] to monkey patching *vanagon*.
+Copy it directly on `puppet-agent-on-windows` directory.
+
+== Pl-build-tools-vanagon
+
+First you need to create the tools with *pl-build-tools-vanagon*
+
+You must create each tool. Actually the list for ubuntu-14 is:
+
+. pl-gcc
+. pl-boost
+. pl-cmake
+. pl-binutils
+. pl-yaml-cpp 
+ 
+[source,dos]
+> cd pl-build-tools-vanagon
+> ruby ..\vanagon.rb pl-gcc ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-boost ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-cmake ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-binutils ubuntu-14.04-amd64 127.0.0.1:2222
+> ruby ..\vanagon.rb pl-yaml-cpp ubuntu-14.04-amd64 127.0.0.1:2222
+> cd ..
+
+Unlike the original script, the ruby script *vanagon.rb* install the generated package on the machine at the end.
+This is necessary for building others packages. 
+(Original script use an url not allowed outside puppetlabs)
+
+
+Now you can build the puppet-agent
+
+> cd puppet-agent
+> ruby ..\vanagon.rb puppet-agent ubuntu-14.04-amd64 127.0.0.1:2222
+> cd ..
+
