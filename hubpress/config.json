@@ -18,7 +18,7 @@
   },
   "urls": {
     "site": "https://nnn-dev.github.io",
-    "hubpress": "http://nnn-dev.github.io",
+    "hubpress": "https://nnn-dev.github.io",
     "theme": "//nnn-dev.github.io/themes/casper",
     "images": "https://nnn-dev.github.io/images"
   },
