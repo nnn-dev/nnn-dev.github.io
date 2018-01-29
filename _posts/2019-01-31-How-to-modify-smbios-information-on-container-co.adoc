@@ -1,0 +1,39 @@
+= How to modify smbios information on container & co ?
+:published_at: 2019-01-31
+:hp-tags: smbios, dmi, lxc, docker, dmidecode, wsl
+
+== What and where is smbios informations ?
+
+The http://www.dmtf.org/standards/smbios[System Management BIOS] is used to access information stocked on BIOS.
+
+On Linux, the program *dmidecode* is often used to show and get these informations. (For instance: by Facter's Puppetlabs or OCSInventory-Agent NG)
+
+Example of dmidecode's output from https://linux.die.net/man/8/dmidecode :
+
+----
+Handle 0x0002, DMI type 2, 8 bytes. Base Board Information Manufacturer: Intel
+Product Name: C440GX+
+Version: 727281-001
+Serial Number: INCY92700942
+
+----
+
+
+In fact, this program reads information from :
+
+* /dev/mem : old kernel 
+* /sys/firmware/dmi/tables/DMI and /sys/firmware/dmi/tables/smbios_entry_point : recent kernel
+
+
+== Retreiving from containers ?
+
+On Virtual Machine, a BIOS is emulated. You have SMBIOS informations. But on containers, either you have nothing or you have host's BIOS informations.
+
+These can be a problem. If you testing on machines with the same serialnumber or none (serialnumber or SSN is an information provided by SMBIOS DMI type 1), your tools may considerate that is the same machine. 
+
+
+== How to create or modify these informations ?
+
+
+
+
